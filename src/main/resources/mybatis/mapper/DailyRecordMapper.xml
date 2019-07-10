@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN "
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qgwy.template.mapper.DailyRecordMapper">
+    <resultMap id="dailyRecord" type="com.qgwy.template.bean.DailyRecord">
+        <id column="id" property="id"/>
+        <result column="userId" property="userId"/>
+        <result column="type" property="type"/>
+        <result column="surface" property="surface"/>
+        <result column="line" property="line"/>
+        <result column="point" property="point"/>
+        <result column="event" property="event"/>
+        <result column="process" property="process"/>
+        <result column="result" property="result"/>
+        <result column="method" property="method"/>
+        <result column="remark" property="remark"/>
+        <result column="date" property="date"/>
+        <result column="time" property="time"/>
+    </resultMap>
+
+    <select id="getDailyRecord" resultMap="dailyRecord">
+          select * from daily_record
+          <if test="dailyRecord != null">
+              <where>
+                  <if test="dailyRecord.id != null">
+                      id=#{dailyRecord.id}
+                  </if>
+                  <if test="dailyRecord.userId != null">
+                      and user_id=#{dailyRecord.userId}
+                  </if>
+                  <if test="dailyRecord.type != null">
+                      and 'type'=#{dailyRecord.type}
+                  </if>
+                  <if test="dailyRecord.line != null">
+                      and line=#{dailyRecord.line}
+                  </if>
+                  <if test="dailyRecord.point != null">
+                      and point=#{dailyRecord.point}
+                  </if>
+                  <if test="dailyRecord.date != null">
+                      and daily_record.date=#{dailyRecord.date}
+                  </if>
+                  <if test="dailyRecord.time != null">
+                      and daily_record.time=#{dailyRecord.time}
+                  </if>
+              </where>
+
+          </if>
+
+    </select>
+
+    <select id="getDaily" resultType="java.util.HashMap">
+        select d.id,u.full_name as fullName,d.date,d.time,t.type_id as typeId,t.type_name as typeName,s.surface_id as surfaceId,s.surface_name as surfaceName,l.line_id as lineId,l.line_name as lineName,p.point_id as pointId,p.point_name as pointName,d.event,d.process,d.result,d.method,d.remark
+        from daily_record d
+        join point p on d.point = p.point_id
+        join type t on d.type=t.type_id
+        join surface s on d.surface=s.surface_id
+        join line l on d.line=l.line_id
+        join user u on d.user_id = u.id
+        <where>
+            <if test="startDate != null and endDate != null">
+                d.date between #{startDate} and #{endDate}
+            </if>
+            <if test="userId != null">
+                and u.id = #{userId}
+            </if>
+        </where>
+        order by d.id desc
+    </select>
+
+    <insert id="addDailyRecord" keyProperty="dailyRecord.id" useGeneratedKeys="true" parameterType="com.qgwy.template.bean.DailyRecord">
+        INSERT INTO daily_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dailyRecord !=null">
+                user_id,
+                daily_record.type,
+                surface,
+                line,
+                point,
+                daily_record.event,
+                process,
+                result,
+                method,
+                remark,
+                daily_record.date,
+                daily_record.time
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")"  suffixOverrides=",">
+            <if test="dailyRecord !=null">
+                <if test="dailyRecord.userId!=null">
+                    #{dailyRecord.userId},
+                </if>
+                <if test="dailyRecord.type!=null">
+                    #{dailyRecord.type},
+                </if>
+                <if test="dailyRecord.surface!=null">
+                    #{dailyRecord.surface},
+                </if>
+                <if test="dailyRecord.line!=null ">
+                    #{dailyRecord.line},
+                </if>
+                <if test="dailyRecord.point!=null ">
+                    #{dailyRecord.point},
+                </if>
+                <if test="dailyRecord.event!=null ">
+                    #{dailyRecord.event},
+                </if>
+                <if test="dailyRecord.process!=null ">
+                    #{dailyRecord.process},
+                </if>
+                <if test="dailyRecord.result!=null ">
+                    #{dailyRecord.result},
+                </if>
+                <if test="dailyRecord.method!=null ">
+                    #{dailyRecord.method},
+                </if>
+                <if test="dailyRecord.remark!=null ">
+                    #{dailyRecord.remark},
+                </if>
+                <if test="dailyRecord.date!=null ">
+                    #{dailyRecord.date},
+                </if>
+                <if test="dailyRecord.time!=null ">
+                    #{dailyRecord.time}
+                </if>
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateDailyRecord" parameterType="com.qgwy.template.bean.DailyRecord">
+        UPDATE daily_record
+        <set>
+            <if test="dailyRecord.userId!=null">
+                user_id=#{dailyRecord.userId},
+            </if>
+            <if test="dailyRecord.type!=null and dailyRecord.type !=''">
+                type=#{dailyRecord.type},
+            </if>
+            <if test="dailyRecord.surface!=null and dailyRecord.surface !=''">
+                surface=#{dailyRecord.surface},
+            </if>
+            <if test="dailyRecord.line!=null and dailyRecord.line !=''">
+                line=#{dailyRecord.line},
+            </if>
+            <if test="dailyRecord.point!=null and dailyRecord.point!=''">
+                point=#{dailyRecord.point},
+            </if>
+            <if test="dailyRecord.event!=null and dailyRecord.event!=''">
+                event=#{dailyRecord.event},
+            </if>
+            <if test="dailyRecord.process!=null and dailyRecord.process!=''">
+                process=#{dailyRecord.process},
+            </if>
+            <if test="dailyRecord.result!=null and dailyRecord.result!=''">
+                result=#{dailyRecord.result},
+            </if>
+            <if test="dailyRecord.method!=null and dailyRecord.method!=''">
+                method=#{dailyRecord.method},
+            </if>
+            <if test="dailyRecord.remark!=null and dailyRecord.remark!=''">
+                remark=#{dailyRecord.remark},
+            </if>
+            <if test="dailyRecord.time!=null and dailyRecord.time!=''">
+                time=#{dailyRecord.time},
+            </if>
+        </set>
+        <where>
+            <if test="dailyRecord.id!=null and dailyRecord.id!=0">
+              and id=#{dailyRecord.id}
+            </if>
+            <if test="dailyRecord.userId!=null and dailyRecord.id!=0">
+               and  user_id=#{dailyRecord.userId}
+            </if>
+        </where>
+    </update>
+
+
+    <!--实际删除 综合表-->
+    <delete id="deleteDailyRecord" parameterType="com.qgwy.template.bean.DailyRecord">
+       delete from daily_record  where id=#{dailyRecord.id}
+    </delete>
+
+</mapper>

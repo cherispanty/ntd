@@ -1,0 +1,30 @@
+.modal-body table{
+border-collapse:separate; border-spacing:0px 10px;!important
+}
+
+.modal-body table tr td {
+	min-width: 60px;!important
+	
+}
+
+.modal-body table tr td select{
+	float: left;
+	width: 80%;!important
+}
+
+.modal-body table tr td textarea{
+	float: left;
+	width: 80%;!important
+}
+
+.modal-body table tr td input{
+	float: left;
+	width: 80%;!important
+}
+
+.modal-body table tr td div{
+	float: left;
+}
+.t1{
+	width: 300px;!important;
+}

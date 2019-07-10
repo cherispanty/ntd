@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8"></meta>
+		<title>ckeditor编辑器</title>
+		<!--导入 ckeditor 完整版-->
+		<script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+
+	</head>
+
+	<body>
+		<!--<tr>
+			<td>
+				<textarea id="content" class="ckeditor" name="content" rows="30" cols="80"></textarea>
+			</td>
+		</tr>-->
+		<form action="showHtml" method="post" id="form1" name="form1">
+			<textarea id="content" name="editor1">
+			<h1><span id="title"  >请输入标题....</span></h1><hr><br>
+			</textarea>
+			<input type="submit" value="提交"/>
+
+		</form>
+		<script type="text/javascript">
+            CKEDITOR.replace("content");
+            CKEDITOR.on("loaded", function(t) {
+                CKEDITOR.titleInput = document.createElement("input", "title-input");
+                CKEDITOR.titleInput.id = 'title';
+                CKEDITOR.titleInput.name='title';
+                CKEDITOR.titleInput.placeholder = "输入标题";
+
+
+                var n = document.querySelector(".cke_editable"),
+                    i = document.querySelector(".cke_contents"),
+                    f = document.querySelector('iframe');
+                i.insertBefore(CKEDITOR.titleInput, f);
+                // e.titleInput.classList.add("cke_enable_context_menu"),
+                // e.editor.titleInput = e.titleInput
+            });
+
+
+		</script>
+	</body>
+
+</html>
