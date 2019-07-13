@@ -124,9 +124,9 @@ public class MvcConfig implements WebMvcConfigurer {
     public HttpMessageConverter<String> responseBodyConverter() {
         StringHttpMessageConverter converter = new StringHttpMessageConverter(
                 Charset.forName("UTF-8"));
-        List<MediaType> list=new ArrayList<>();
-        list.add(MediaType.ALL);
-        converter.setSupportedMediaTypes(list);
+        /*List<MediaType> list=new ArrayList<>();
+        list.add(MediaType.ALL);*/
+        //converter.setSupportedMediaTypes(list);
         return converter;
     }
 

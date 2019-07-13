@@ -1,16 +1,17 @@
 package com.qgwy.template.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 
 @Controller
 @RequestMapping("/ckeditor")
+@Api(tags = {"ckeditor测试"})
 public class CkeditorController {
 
 	//图片上传路径
@@ -24,7 +25,8 @@ public class CkeditorController {
 	 * 进入编辑器页面
 	 * @return
 	 */
-	@RequestMapping("/edit")
+	@GetMapping("/edit")
+	@ApiOperation("编辑器页面")
 	public String editor() {
 		return "html/edit";
 	}
@@ -37,7 +39,8 @@ public class CkeditorController {
 	 * @throws Exception
 	 */
 	@ResponseBody
-	@RequestMapping("/imageUpload")
+	@PostMapping("/imageUpload")
+	@ApiOperation("图片上传")
 	//名字upload是固定的
 	public String ckeditorUpload(@RequestParam("upload") MultipartFile file, String CKEditorFuncNum) throws Exception {
 		// 获取文件名
@@ -63,7 +66,8 @@ public class CkeditorController {
 	 * @throws Exception
 	 */
 	@ResponseBody
-	@RequestMapping("/videoUpload")
+	@PostMapping("/videoUpload")
+	@ApiOperation("视频上传")
 	//名字upload是固定的
 	public String videoUpload(@RequestParam("upload") MultipartFile file, String CKEditorFuncNum) throws Exception {
 		// 获取文件名
@@ -82,7 +86,8 @@ public class CkeditorController {
 		return sb.toString();
 	}
 
-	@RequestMapping("showHtml")
+	@GetMapping("showHtml")
+	@ApiOperation("跳转到目标页")
 	public String receiveHtml(String editor1){
 		System.out.println(editor1);
 		return "redirect:edit";

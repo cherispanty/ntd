@@ -20,6 +20,7 @@ log/
 ### IntelliJ IDEA ###
 .idea
 .mvn
+docs
 *.iws
 *.iml
 *.ipr
