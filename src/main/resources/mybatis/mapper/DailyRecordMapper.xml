@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN "
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.qgwy.template.mapper.DailyRecordMapper">
-    <resultMap id="dailyRecord" type="com.qgwy.template.bean.DailyRecord">
+<mapper namespace="com.qgwy.ntd.mapper.DailyRecordMapper">
+    <resultMap id="dailyRecord" type="com.qgwy.ntd.bean.DailyRecord">
         <id column="id" property="id"/>
         <result column="userId" property="userId"/>
         <result column="type" property="type"/>
@@ -69,7 +69,7 @@
         order by d.id desc
     </select>
 
-    <insert id="addDailyRecord" keyProperty="dailyRecord.id" useGeneratedKeys="true" parameterType="com.qgwy.template.bean.DailyRecord">
+    <insert id="addDailyRecord" keyProperty="dailyRecord.id" useGeneratedKeys="true" parameterType="com.qgwy.ntd.bean.DailyRecord">
         INSERT INTO daily_record
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="dailyRecord !=null">
@@ -129,7 +129,7 @@
         </trim>
     </insert>
 
-    <update id="updateDailyRecord" parameterType="com.qgwy.template.bean.DailyRecord">
+    <update id="updateDailyRecord" parameterType="com.qgwy.ntd.bean.DailyRecord">
         UPDATE daily_record
         <set>
             <if test="dailyRecord.userId!=null">
@@ -178,7 +178,7 @@
 
 
     <!--实际删除 综合表-->
-    <delete id="deleteDailyRecord" parameterType="com.qgwy.template.bean.DailyRecord">
+    <delete id="deleteDailyRecord" parameterType="com.qgwy.ntd.bean.DailyRecord">
        delete from daily_record  where id=#{dailyRecord.id}
     </delete>
 

@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.qgwy</groupId>
-    <artifactId>qgwy-template</artifactId>
+    <artifactId>ntd</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <packaging>war</packaging>
 
-    <name>qgwy-template</name>
-    <description>qgwy-template project for Spring Boot</description>
+    <name>ntd</name>
+    <description>ntd project for Spring Boot</description>
 
 
     <parent>
@@ -236,7 +236,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
 
-                    <mainClass>com.qgwy.template.QgwyApplication</mainClass><!--这个要改成自己的入口类-->
+                    <mainClass>com.qgwy.ntd.NtdApplication</mainClass><!--这个要改成自己的入口类-->
                     <fork>true</fork>
                 </configuration>
                 <executions>
