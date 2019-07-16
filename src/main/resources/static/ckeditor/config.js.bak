@@ -1,0 +1,61 @@
+/**
+ * @license Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
+ * For licensing, see LICENSE.html or http://ckeditor.com/license
+   ckeditor_4.3.4_full.zip
+ */
+
+CKEDITOR.plugins.addExternal('fmath_formula', 'plugins/fmath_formula/', 'plugin.js');
+
+CKEDITOR.addTemplates("default",{imagesPath:CKEDITOR.getUrl(CKEDITOR.plugins.getPath("templates")+"templates/images/"),
+	templates:[{title:"Image and Title",image:"template1.gif",
+		description:"One main image with a title and text that surround the image.",
+		html:'\x3ch1\x3e\x3cimg src\x3d" " alt\x3d"" ' +
+			'style\x3d"margin-right: 10px" height\x3d"100" width\x3d"100" align\x3d"left" ' +
+			'/\x3eh1Type the title here\x3c/h1\x3e\x3cp\x3eType the text here\x3c/p\x3e'},{title:"Strange Template",image:"template2.gif",description:"A template that defines two columns, each one with a title, and some text.",
+html:'\x3ctable cellspacing\x3d"0" cellpadding\x3d"0" style\x3d"width:100%" border\x3d"0"\x3e\x3ctr\x3e\x3ctd style\x3d"width:50%"\x3e\x3ch3\x3eTitle 1\x3c/h3\x3e\x3c/td\x3e\x3ctd\x3e\x3c/td\x3e\x3ctd style\x3d"width:50%"\x3e\x3ch3\x3eTitle 2\x3c/h3\x3e\x3c/td\x3e\x3c/tr\x3e\x3ctr\x3e\x3ctd\x3eText 1\x3c/td\x3e\x3ctd\x3e\x3c/td\x3e\x3ctd\x3eText 2\x3c/td\x3e\x3c/tr\x3e\x3c/table\x3e\x3cp\x3eMore text goes here.\x3c/p\x3e'},{title:"Text and Table",image:"template3.gif",description:"A title with some text and a table.",
+html:'\x3cdiv style\x3d"width: 80%"\x3e\x3ch3\x3eTitle goes here\x3c/h3\x3e\x3ctable style\x3d"width:150px;float: right" cellspacing\x3d"0" cellpadding\x3d"0" border\x3d"1"\x3e\x3ccaption style\x3d"border:solid 1px black"\x3e\x3cstrong\x3eTable title\x3c/strong\x3e\x3c/caption\x3e\x3ctr\x3e\x3ctd\x3e\x26nbsp;\x3c/td\x3e\x3ctd\x3e\x26nbsp;\x3c/td\x3e\x3ctd\x3e\x26nbsp;\x3c/td\x3e\x3c/tr\x3e\x3ctr\x3e\x3ctd\x3e\x26nbsp;\x3c/td\x3e\x3ctd\x3e\x26nbsp;\x3c/td\x3e\x3ctd\x3e\x26nbsp;\x3c/td\x3e\x3c/tr\x3e\x3ctr\x3e\x3ctd\x3e\x26nbsp;\x3c/td\x3e\x3ctd\x3e\x26nbsp;\x3c/td\x3e\x3ctd\x3e\x26nbsp;\x3c/td\x3e\x3c/tr\x3e\x3c/table\x3e\x3cp\x3eType the text here\x3c/p\x3e\x3c/div\x3e'}]});
+
+CKEDITOR.editorConfig =  function (config) {
+    //config.filebrowserBrowseUrl =  '${base}/ckfinder/ckfinder.html' ;
+    //config.filebrowserImageBrowseUrl =  '${base}/ckfinder/ckfinder.html?type=Images' ;
+    //config.filebrowserFlashBrowseUrl =  '${base}/ckfinder/ckfinder.html?type=Flash' ;
+    config.filebrowserUploadUrl="/edit/ckeditorUpload"; 
+    //config.filebrowserUploadUrl =  '${base}/ckEditorAjax_uploadFile.action';    
+   // config.filebrowserImageUploadUrl = '${base}/ckEditorAjax_uploadImg.action';    
+    config.filebrowserFlashUploadUrl =  '${base}/ckEditorAjax_uploadFlash.action';    
+   
+    config.filebrowserWindowWidth = '1000';
+    config.filebrowserWindowHeight = '700';
+    config.language =  "zh-cn" ;
+    config.toolbar = 'Full';
+    
+    config.toolbar_MyToolbar =
+        [
+          { name: 'document', items : [ 'Source','Preview'] },
+          { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
+          { name: 'basicstyles', items : [ 'Bold','Italic','Strike','-','RemoveFormat' ] }
+        ];
+   
+   config.toolbar_Full =
+	[
+	['Source','-','Save','NewPage','Preview','-','Templates'],
+	['Cut','Copy','Paste','PasteText','PasteFromWord','-','Print', 'SpellChecker', 'Scayt'],
+	['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],
+	['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'],
+	'/',
+	['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],
+	['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
+	['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+	['Link','Unlink','Anchor','fmath_formula'],
+	['Image','Flash','Video','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],
+	//['Image','Flash','FlvPlayer','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],
+	'/',
+	['Styles','Format','Font','FontSize'],
+	['TextColor','BGColor'],
+	['Maximize', 'ShowBlocks','-','About']
+	];     
+       //config.extraPlugins = 'flvPlayer,fmath_formula';
+       config.extraPlugins = 'video'; 
+
+}; 
+

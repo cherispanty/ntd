@@ -1,0 +1,107 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      first:  #数据源1
+          driverClassName: com.mysql.jdbc.Driver
+          url: jdbc:mysql://192.168.100.36:3306/daily?useUnicode=true&characterEncoding=UTF-8
+          username: root
+          password: 123456
+
+          #   数据源其他配置
+          initialSize: 10
+          minIdle: 10
+          maxActive: 30
+          maxWait: 60000
+          timeBetweenEvictionRunsMillis: 60000
+          minEvictableIdleTimeMillis: 300000
+          validationQuery: SELECT 1 FROM DUAL
+          testWhileIdle: true
+          testOnBorrow: false
+          testOnReturn: false
+          poolPreparedStatements: true
+          #   配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+          filters: stat,wall,slf4j
+          filter:
+            slf4j:
+              enabled: true
+              statement-create-after-log-enabled: false
+              statement-close-after-log-enabled: false
+              result-set-open-after-log-enabled: false
+              result-set-close-after-log-enabled: false
+          maxPoolPreparedStatementPerConnectionSize: 20
+          useGlobalDataSourceStat: true
+          connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+      second:  #数据源2
+          type: com.alibaba.druid.pool.DruidDataSource
+          url: jdbc:mysql://192.168.100.36:3306/daily?useUnicode=true&characterEncoding=UTF-8
+          username: root
+          password: 123456
+          driverClassName: com.mysql.jdbc.Driver
+      test:  #数据源3
+          type: com.alibaba.druid.pool.DruidDataSource
+          url: jdbc:mysql://192.168.100.36:3306/daily?useUnicode=true&characterEncoding=UTF-8
+          username: root
+          password: 123456
+          driverClassName: com.mysql.jdbc.Driver
+
+
+
+
+
+  mvc:
+    view:
+      #采用jsp模板引擎
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+    static-path-pattern: /static/**
+  servlet:
+    multipart:
+      max-file-size: 10Mb
+      max-request-size: 10Mb
+
+    chain:
+      cache: false
+
+  thymeleaf:
+    cache: false
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+
+mybatis:
+  # 指定全局配置文件位置
+  config-location: classpath:mybatis/mybatis-config.xml
+  # 指定sql映射文件位置
+  mapper-locations: classpath:mybatis/mapper/*.xml
+#  schema:
+#  - classpath:sql/department.sql
+#  - classpath:sql/employee.sql
+server:
+  port: 39000
+
+  devtools:
+    livereload:
+      enabled: true #是否支持livereload
+      port: 90000
+    restart:
+      enabled: true #是否支持热部署
+  management:
+    port: 54001
+    health:
+      mail:
+        enabled: false
+
+  servlet:
+    session:
+      timeout: 3000s
+    context-path: /
+  tomcat:
+    uri-encoding: UTF-8
+
+
+
+
